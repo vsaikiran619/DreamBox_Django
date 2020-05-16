@@ -12,7 +12,7 @@ First-time setup
 1) Make sure Python 3.7x,Pipenv and PostgreSql are already installed.
 2) Clone the repo and configure the virtualenv:
 
-	$ git clone https://github.com/Rakeshvarma301/DreamBox_django_project.git
+	$ git clone https://github.com/vsaikiran619/DreamBox_Django.git
 	$ cd web
 	$ pipenv install
 	$ pipenv shell
