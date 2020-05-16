@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+	<div>
+		<h3>Interview Form</h3>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8" style="padding-bottom: 40px;">
+			<h2>Fill the form below contains :</h2>
+			<form method="POST">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<input type="submit" value="Submit Form">
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock content %}

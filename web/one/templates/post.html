@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="container">
+	<div class="row">
+		<!-- Latest Posts -->
+		<main class="post blog-post col-lg-8">
+			<div class="container">
+				<div class="post-single">
+					<div class="post-thumbnail">
+						<img src="{{post.img.url}}" alt="..." class="img-fluid">
+					</div>
+					<div class="post-details">
+						<div class="post-meta d-flex justify-content-between">
+							<div class="category">
+								<a href=".">{{post.category}} </a>
+							</div>
+						</div>
+						<h1>{{post.title}}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+						<div class="post-footer d-flex align-items-center flex-column flex-sm-row">
+							<a href="#" class="author d-flex align-items-center flex-wrap">
+								<!-- <div class="avatar">
+									<img src="{% static 'img/avatar-1.jpg' %}" alt="..." class="img-fluid">
+								</div> -->
+								<div class="title"><span>Rakesh </span></div>
+							</a>
+							<div class="d-flex align-items-center flex-wrap">
+								<div class="date"><i class="icon-clock"></i> {{post.date}}</div>
+								<div class="comments meta-last"><i class="icon-comment"></i>{{post.comments_count}}</div>
+							</div>
+						</div>
+						<br>
+						<div>
+							<div>
+								<h6>About Company :</h6>
+								<p>{{post.about|linebreaks}}
+								</p>
+							</div>
+							<div>
+								<h6>Eligibility Criteria :</h6>
+
+								<p>{{post.eligibility|linebreaks}}
+								</p>
+							</div>
+							<div>
+								<h6>Skills required :</h6>
+
+								<p>{{post.skills|linebreaks}}
+								</p>
+							</div>
+							<div>
+								<h6>Interview procedure :</h6>
+
+								<p>{{post.interview_procedure|linebreaks}}
+								</p>
+							</div>
+							<div>
+								<h6>Questiions :</h6>
+								<p>{{post.questions|linebreaks}}
+								</p>
+							</div>
+						</div>
+
+						<div class="post-comments">
+							<header>
+								<h3 class="h6">Post Comments<span class="no-of-comments">({{post.comments.count}})</span></h3>
+							</header>
+							{%for comm in post.get_comments %}
+							<div class="comment">
+								<div class="comment-header d-flex justify-content-between">
+									<div class="user d-flex align-items-center">
+										<div class="image"><img src="{% static 'img/user.svg' %}" alt="..." class="img-fluid rounded-circle"></div>
+										<div class="title"><strong>{{comm.user.username}}</strong><span class="date">{{comm.timestamp|timesince}} ago</span></div>
+									</div>
+								</div>
+								<div class="comment-body">
+									<p>{{comm.comment|linebreaks}}</p>
+								</div>
+							</div>
+							{% endfor %}
+
+						</div>
+						<!-- {% if request.user.is_authenticated %} -->
+						<div class="add-comment">
+							<header>
+								<h3 class="h6">Leave a reply</h3>
+							</header>
+							<form method="POST" action="." class="commenting-form">
+								{% csrf_token %}
+								<div class="row">
+									<div class="form-group col-md-12">
+										{{form}}
+									</div>
+									<div class="form-group col-md-12">
+										<button type="submit" class="btn btn-secondary">Submit Comment</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!-- {% endif %} -->
+					</div>
+				</div>
+			</div>
+		</main>
+		<aside class="col-lg-4">
+			<div class="widget tags">
+				<header>
+					<h3 class="h6">Do You have Interview Experience..?</h3>
+				</header>
+				<div>
+					<p>Lets Share Your Experience </p>
+					<a href="/interview-form">Click here to Write Your Story </a>
+				</div>
+			</div>
+
+			<!-- Widget [Latest Posts Widget]        -->
+			<div class="widget latest-posts">
+				<header>
+					<h3 class="h6">Latest Posts</h3>
+				</header>
+				<div class="blog-posts">
+
+					{% for post in most_recent %}
+					<a href="{{post.get_absolute_url}}">
+						<div class="item d-flex align-items-center">
+							<div class="image"><img src="{{post.img.url}}" alt="..." class="img-fluid"></div>
+							<div class="title"><strong>{{post.title}}</strong>
+								<div class="d-flex align-items-center">
+									<div class="comments"><i class="icon-comment"></i>{{post.comments.count}}</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					{% endfor %}
+
+				</div>
+			</div>
+
+		</aside>
+	</div>
+</div>
+{% else %}
+	<h1>Please login</h1>
+{% endif %}
+{% endblock content %}

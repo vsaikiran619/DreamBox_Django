@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" style="height: 60px; padding-top:10px; padding-bottom:10px;">
+    
+	<div style="height: 30px;">
+		<h3>Interview Experience Section</h3>
+	</div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8" style="padding-bottom:50px">
+            <!-- Widget [Search Bar Widget]-->
+            <div class="widget search">
+                <header>
+                    <h3 class="h6">Search the interview experience</h3>
+                </header>
+                <form action="{% url 'searchInterviews' %}" class="search-form">
+                    <div class="form-group">
+                        <input type="text" name="q" placeholder="Which company experience are you looking for?">
+                        <button type="submit" class="submit"><i class="icon-search"></i></button>
+                    </div>
+                </form>
+            </div>
+            {% for p in post %}
+                <div style="border-style: groove; padding-left:10px;">
+                    <h4>
+                        <strong style="color:lightseagreen;">Company Name : {{p.company_name}}</strong>
+                    </h4>
+                    <p>(Posted {{p.timestamp|timesince}} ago)</p>
+                    <br>
+                    <strong>Person Name : </strong>{{p.name}}<br><br>
+                    <strong>Selected Year : </strong>{{p.selected_year}}<br><br>
+                    <strong>Pay Scale : </strong>{{p.package|linebreaks}}<br>
+                    <strong>Selected Role : </strong>{{p.role|linebreaks}}<br>
+                    <strong>Qualification : </strong>{{p.qualification|linebreaks}}<br>
+                    <strong>Required Skills : </strong>{{p.skills|linebreaks}}<br>
+                    <strong>No.of Rounds : </strong>{{p.rounds|linebreaks}}<br>
+                    <strong>Interview Experience : </strong>{{p.interview_Experience|linebreaks}}<br>
+                    <strong>Asked Questions : </strong>{{p.questions|linebreaks}}<br>
+                    <strong>Suggestions : </strong>{{p.suggestions|linebreaks}}<br><br>
+                </div>
+            {% endfor %}
+                
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

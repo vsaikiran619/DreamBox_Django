@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+{% block content %}
+    <div class="container">
+        <h1 style="height: 100px; padding-top:20px; padding-bottom:60px; text-align:center;">Registration page</h1>
+        <div>
+            <form action="{{register}}" method="POST">
+                {% csrf_token %}
+                <pre style="text-align: center;font-size:x-large; font-style:italic; ">
+                First Name       : <input type="text" name="first_name" placeholder="First Name"><br>
+                Last Name        : <input type="text" name="last_name" placeholder="Last Name"><br>
+                Username         : <input type="text" name="username" placeholder="User Name"><br>
+                Email            : <input type="email" name="email" placeholder="mail id"><br>
+                Password         : <input type="password" name="password1" placeholder="password"><br>
+                Confirm Password : <input type="password" name="password2" placeholder="Confirm Password"><br>
+                <input type="submit">
+                </pre>
+            </form>
+        </div>
+        <div>
+            {% for message in messages %}
+                {{ message }}
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content%}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <h2 style="height: 100px; text-align:center;padding-top:20px; padding-bottom:20px;">This is the results of your search </h2>
+    <div style="height: 500px;">
+        {% for result in queryset %}
+            <h4 style="text-align: center;">
+                <a href="{{ result.get_absolute_url }}"> {{ result.title }} </a>
+            </h4><br>
+        {% empty %}
+            <h4>Nothing Found about your search</h4>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
